@@ -7,6 +7,7 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
 class Solution {
 public:
     // recursively add
@@ -23,7 +24,7 @@ public:
             --level;
         }
         if(node->right){
-            read(node->right, ++level);
+            read(node->right, ret, ++level);
             --level;
         }
     }
