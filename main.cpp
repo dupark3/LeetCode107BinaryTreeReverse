@@ -11,30 +11,28 @@
 class Solution {
 public:
     // recursively add
-    void read(TreeNode* node, vector< vector<int> >& ret, int level = 0){
-        if (ret.size() <= level){
-            vector<int> temp = { node->val };
-            ret.push_back(temp);
-        } else {
-            ret[level].push_back(node->val);
-        }
+    void read(TreeNode* node, vector< vector<int> >& vec, int level = 0){
+        if (vec.size() <= level)
+            vec.push_back( { node->val } );
+        else
+            vec[level].push_back(node->val);
             
         if(node->left){
-            read(node->left, ret, ++level);
+            read(node->left, vec, ++level);
             --level;
         }
         if(node->right){
-            read(node->right, ret, ++level);
+            read(node->right, vec, ++level);
             --level;
         }
     }
 
     vector< vector<int> > levelOrderBottom(TreeNode* root) {
-        vector< vector<int> > ret;
-        if (root)
-            read(root, ret);
+        vector< vector<int> > forward_order;
+        if (root) 
+            read(root, forward_order);
         
-        vector< vector<int> > reverse_order(ret.rbegin(), ret.rend());
+        vector< vector<int> > reverse_order(forward_order.rbegin(), forward_order.rend());
         return reverse_order;
     }
 };
