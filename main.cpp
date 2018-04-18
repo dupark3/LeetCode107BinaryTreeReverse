@@ -17,14 +17,11 @@ public:
         else
             vec[level].push_back(node->val);
             
-        if(node->left){
-            read(node->left, vec, ++level);
-            --level;
-        }
-        if(node->right){
-            read(node->right, vec, ++level);
-            --level;
-        }
+        if(node->left)
+            read(node->left, vec, level + 1);
+        if(node->right)
+            read(node->right, vec, level + 1);
+        
     }
 
     vector< vector<int> > levelOrderBottom(TreeNode* root) {
