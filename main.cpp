@@ -33,8 +33,7 @@ public:
         if (root)
             read(root, ret);
         
-        vector< vector<int> > reverse_order;
-        copy_backward(ret.begin(), ret.end(), back_inserter(reverse_order));
+        vector< vector<int> > reverse_order(ret.rbegin(), ret.rend());
         return reverse_order;
     }
 };
