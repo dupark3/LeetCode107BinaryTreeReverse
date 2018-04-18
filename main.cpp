@@ -9,7 +9,33 @@
  */
 class Solution {
 public:
-    vector<vector<int>> levelOrderBottom(TreeNode* root) {
+    // recursively add
+    void read(TreeNode* node, vector< vector<int> >& ret, int level = 0){
+        if (ret.size() <= level){
+            vector<int> temp = { node->val };
+            ret.push_back(temp);
+        } else {
+            ret[level].push_back(node->val);
+        }
+            
+        if(node->left){
+            read(node->left, ret, ++level);
+            --level;
+        }
+        if(node->right){
+            read(node->right, ++level);
+            --level;
+        }
+    }
+
+    vector< vector<int> > levelOrderBottom(TreeNode* root) {
+        vector< vector<int> > ret;
+        if (root)
+            read(root, ret);
         
+        vector< vector<int> > reverse_order;
+        copy_backward(ret.begin(), ret.end(), back_inserter(reverse_order));
+        return reverse_order;
     }
 };
+
